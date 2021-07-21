@@ -1,0 +1,85 @@
+version: '2'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    # container_name: kafka-zk-1
+    ports:
+      - "12181:2181"
+  kafka-1:
+    image: kafka-docker_kafka
+    ports:
+      - "45671:9092"
+    container_name: kafka-broker-1
+    environment:
+      DOCKER_API_VERSION: 1.22
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.12.11
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181/kafka
+      KAFKA_BROKER_ID: 1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  kafka-2:
+    image: kafka-docker_kafka
+    ports:
+      - "45672:9092"
+    container_name: kafka-broker-2
+    environment:
+      DOCKER_API_VERSION: 1.22
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.12.11
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181/kafka
+      KAFKA_BROKER_ID: 2
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  kafka-3:
+    image: kafka-docker_kafka
+    ports:
+      - "45673:9092"
+    container_name: kafka-broker-3
+    environment:
+      DOCKER_API_VERSION: 1.22
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.12.11
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181/kafka
+      KAFKA_BROKER_ID: 3
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  kafka-4:
+    image: kafka-docker_kafka
+    ports:
+      - "45674:9092"
+    container_name: kafka-broker-4
+    environment:
+      DOCKER_API_VERSION: 1.22
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.12.11
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181/kafka
+      KAFKA_BROKER_ID: 4
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  kafka-5:
+    image: kafka-docker_kafka
+    ports:
+      - "45675:9092"
+    container_name: kafka-broker-5
+    environment:
+      DOCKER_API_VERSION: 1.22
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.12.11
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181/kafka
+      KAFKA_BROKER_ID: 5
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  kafka-6:
+    image: kafka-docker_kafka
+    ports:
+      - "45676:9092"
+    container_name: kafka-broker-6
+    environment:
+      DOCKER_API_VERSION: 1.22
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.12.11
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181/kafka
+      KAFKA_BROKER_ID: 6
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
