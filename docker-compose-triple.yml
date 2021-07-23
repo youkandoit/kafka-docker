@@ -1,0 +1,63 @@
+# 3个kafka broker，使用image是wurstmeister/kafka:2.11-0.10.2.2
+version: '2'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "12181:2181"
+  kafka-1:
+    image: wurstmeister/kafka:2.11-0.10.2.2
+    depends_on:
+      - zookeeper
+    ports:
+      - "45671:9092"
+    container_name: kafka-broker-1
+    environment:
+      DOCKER_API_VERSION: 1.22
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.12.11
+      KAFKA_ADVERTISED_PORT: 45671
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181/kafka
+      KAFKA_BROKER_ID: 1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  kafka-2:
+    image: wurstmeister/kafka:2.11-0.10.2.2
+    depends_on:
+      - zookeeper
+    ports:
+      - "45672:9092"
+    container_name: kafka-broker-2
+    environment:
+      DOCKER_API_VERSION: 1.22
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.12.11
+      KAFKA_ADVERTISED_PORT: 45672
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181/kafka
+      KAFKA_BROKER_ID: 2
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  kafka-3:
+    image: wurstmeister/kafka:2.11-0.10.2.2
+    depends_on:
+      - zookeeper
+    ports:
+      - "45673:9092"
+    container_name: kafka-broker-3
+    environment:
+      DOCKER_API_VERSION: 1.22
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.12.11
+      KAFKA_ADVERTISED_PORT: 45673
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181/kafka
+      KAFKA_BROKER_ID: 3
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  kafkaeagle:
+    image: kafkaeagle:latest
+    environment:
+      KAFKA_EAGLE_CLUSTER_ZK_LIST: zookeeper:2181/kafka
+      KAFKA_EAGLE_CLUSTER_KAFKA_EAGLE_BROKER_SIZE: 1
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+    ports:
+      - "8048:8048"
