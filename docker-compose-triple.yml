@@ -50,14 +50,14 @@ services:
       KAFKA_BROKER_ID: 3
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-  kafkaeagle:
-    image: kafkaeagle:latest
-    environment:
-      KAFKA_EAGLE_CLUSTER_ZK_LIST: zookeeper:2181/kafka
-      KAFKA_EAGLE_CLUSTER_KAFKA_EAGLE_BROKER_SIZE: 1
-    depends_on:
-      - kafka-1
-      - kafka-2
-      - kafka-3
-    ports:
-      - "8048:8048"
+  # kafkaeagle:
+  #   image: kafkaeagle:latest
+  #   environment:
+  #     KAFKA_EAGLE_CLUSTER_ZK_LIST: zookeeper:2181/kafka
+  #     KAFKA_EAGLE_CLUSTER_KAFKA_EAGLE_BROKER_SIZE: 1
+  #   depends_on:
+  #     - kafka-1
+  #     - kafka-2
+  #     - kafka-3
+  #   ports:
+  #     - "8048:8048"
